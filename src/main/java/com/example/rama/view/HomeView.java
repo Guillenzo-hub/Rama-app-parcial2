@@ -7,7 +7,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route("") // Esto la hace la vista de inicio
+@Route("") // Vista pública
 @PageTitle("Inicio")
 public class HomeView extends VerticalLayout {
 
@@ -25,8 +25,12 @@ public class HomeView extends VerticalLayout {
 
         Button startButton = new Button("Empezar");
         startButton.getStyle().set("background-color", "#6f4e37").set("color", "white");
+
+        // Redirige al login de Auth0
         startButton.addClickListener(e ->
-            startButton.getUI().ifPresent(ui -> ui.navigate("dashboard"))
+            startButton.getUI().ifPresent(ui ->
+                ui.getPage().setLocation("/oauth2/authorization/auth0")
+            )
         );
 
         add(
@@ -36,5 +40,6 @@ public class HomeView extends VerticalLayout {
         );
     }
 }
+
 
 
