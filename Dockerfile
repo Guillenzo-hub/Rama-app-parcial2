@@ -12,6 +12,7 @@ WORKDIR /app
 # Copia archivos necesarios para descargar dependencias
 COPY .mvn .mvn
 COPY mvnw .
+RUN chmod +x mvnw
 COPY pom.xml .
 
 # Descarga dependencias
