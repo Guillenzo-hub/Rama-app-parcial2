@@ -1,31 +1,33 @@
 FROM eclipse-temurin:17-jdk
 
-# Instalar Node.js y npm
+# Instala Node.js y npm (necesario para Vaadin)
 RUN apt-get update && \
     apt-get install -y curl && \
     curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs
 
-# Directorio de la aplicación
+# Directorio de trabajo
 WORKDIR /app
 
-# Copiar el wrapper y dependencias
+# Copia archivos necesarios para descargar dependencias
 COPY .mvn .mvn
 COPY mvnw .
 COPY pom.xml .
 
-# Descargar dependencias
+# Descarga dependencias
 RUN ./mvnw dependency:go-offline
 
-# Copiar el resto del proyecto
+# Copia el resto del proyecto
 COPY . .
 
-# Construir el proyecto (genera el frontend también)
-RUN ./mvnw clean install
+# Compila el proyecto y genera el .jar
+RUN ./mvnw clean package -DskipTests
 
-# Exponer el puerto
+# Expone el puerto estándar de Spring Boot
 EXPOSE 8080
 
-# Ejecutar la app
-CMD ["./mvnw", "spring-boot:run"]
+# Ejecuta la app
+CMD ["java", "-jar", "target/rama-0.0.1-SNAPSHOT.jar"]
+
+
 
