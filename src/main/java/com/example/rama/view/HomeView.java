@@ -28,9 +28,9 @@ public class HomeView extends VerticalLayout {
 
         // Redirige al login de Auth0
         startButton.addClickListener(e ->
-            startButton.getUI().ifPresent(ui ->
-                ui.getPage().setLocation("/oauth2/authorization/auth0")
-            )
+        startButton.getUI().ifPresent(ui ->
+        ui.getPage().setLocation("/oauth2/authorization/auth0")
+        )
         );
 
         add(
