@@ -6,10 +6,12 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 // ✅ CORREGIDO: Usar nueva ruta base de Vaadin
 @Route("app/dashboard")
 @PageTitle("Dashboard")
+@AnonymousAllowed
 public class DashboardView extends VerticalLayout {
 
     public DashboardView() {
